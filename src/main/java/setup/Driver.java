@@ -1,6 +1,7 @@
 package setup;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -26,6 +27,9 @@ public class Driver extends TestProperties {
     protected static String TEST_PLATFORM;
     protected static String DRIVER;
     protected static String DEVICE_NAME;
+    protected static String UDID;
+    protected static String APP_PACKAGE;
+    protected static String APP_ACTIVITY;
 
     /**
      * Initialize driver with depending on platform and application
@@ -41,6 +45,9 @@ public class Driver extends TestProperties {
         TEST_PLATFORM = getProp("platform");
         DRIVER = getProp("driver");
         DEVICE_NAME = getProp("devicename");
+        UDID = getProp("udid");
+        APP_PACKAGE = getProp("appPackage");
+        APP_ACTIVITY = getProp("appActivity");
 
         capabilities = new DesiredCapabilities();
         String browserName;
@@ -57,14 +64,18 @@ public class Driver extends TestProperties {
             default:
                 throw new IllegalArgumentException();
         }
-
+        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, TEST_PLATFORM);
+        capabilities.setCapability(MobileCapabilityType.UDID, UDID);
+
 
         //Setup type of application: mobile, web or hybrid
         if (AUT != null && SUT == null) {
             //Native
             File app = new File(AUT);
             capabilities.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+            capabilities.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, APP_PACKAGE);
+            capabilities.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, APP_ACTIVITY);
         } else if (SUT != null && AUT == null) {
             //Web
             capabilities.setCapability(MobileCapabilityType.BROWSER_NAME, browserName);
