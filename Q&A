@@ -1,0 +1,12 @@
+1.	Change settings to run web test on a certain iOS device in mobile cloud. Run test with your changes. Did test pass?
+Yes, test passed
+2.	Change settings to run native test on a certain/random Android device in mobile cloud.
+Add support of appPackage and appActivity parameters for Android devices (reading from a .properties file and then
+setting in the DesiredCapabilities). Locally installed Appium DT has no need in these parameters, but for Appium server
+ of EPAM mobile cloud it’s mandatory.
+Done
+3.	 Run test with your changes. Did test pass?
+Yes, test passed, but it is necessary to install manually ContactManager.apk on testing device on farm
+4.	Try to use autoLaunch capability with app as before instead of appPackage and appActivity. Does this approach work?
+No, test failed
+5.	What’s wrong with our code? How to fix/improve it? Implement your suggestions.

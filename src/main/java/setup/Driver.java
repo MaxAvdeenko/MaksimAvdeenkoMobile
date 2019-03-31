@@ -55,7 +55,6 @@ public class Driver extends TestProperties {
         //Setup browser depending on platform
         switch (TEST_PLATFORM) {
             case ANDROID:
-                capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME); //default Android emulator
                 browserName = CHROME;
                 break;
             case IOS:
@@ -64,7 +63,6 @@ public class Driver extends TestProperties {
             default:
                 throw new IllegalArgumentException();
         }
-        capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
         capabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, TEST_PLATFORM);
         capabilities.setCapability(MobileCapabilityType.UDID, UDID);
 
